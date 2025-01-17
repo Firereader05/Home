@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Welcome to My Cool Website!</h1>
+        <nav>
+            <a href="#about">About Me</a>
+            <a href="#projects">Projects</a>
+            <a href="#minigames">Mini Games</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Hi, I'm a passionate developer who loves coding, 3D printing, and game development. Check out the fun things I've built below!</p>
+    </section>
+
+    <section id="projects">
+        <h2>My Projects</h2>
+        <p>Here are some cool projects I've worked on recently:</p>
+        <ul>
+            <li>Minecraft Replica in JavaScript</li>
+            <li>Unity Snake AI Training</li>
+            <li>Neural Network Learning Project</li>
+            <li>3D Printing Projects</li>
+            <li>Custom Game Engine</li>
+        </ul>
+    </section>
+
+    <section id="minigames">
+        <h2>Mini Games</h2>
+        <p>Check out these awesome mini games I made! Try them out!</p>
+        <button onclick="playPong()">Play Pong</button>
+        <canvas id="pongCanvas"></canvas>
+
+        <button onclick="playTicTacToe()">Play Tic Tac Toe</button>
+        <div id="ticTacToeBoard"></div>
+
+        <button onclick="playSnake()">Play Snake</button>
+        <canvas id="snakeCanvas"></canvas>
+
+        <button onclick="playBreakout()">Play Breakout</button>
+        <canvas id="breakoutCanvas"></canvas>
+
+        <button onclick="playMemoryGame()">Play Memory Game</button>
+        <div id="memoryGameBoard"></div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <p>You can reach me at: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
+    </section>
+
+    <footer>
+        <p>© 2025 My Cool Website. Built in a GitHub Codespace.</p>
+    </footer>
+
+    <script>
+        function playPong() {
+            const canvas = document.getElementById('pongCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 400;
+            canvas.height = 300;
+            let ball = { x: 200, y: 150, dx: 2, dy: 2, radius: 10 };
+            let paddle = { x: 175, y: 280, width: 50, height: 10 };
+
+            document.addEventListener('mousemove', (event) => {
+                paddle.x = event.clientX - canvas.getBoundingClientRect().left - paddle.width / 2;
+            });
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'black';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.beginPath();
+                ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'white';
+                ctx.fill();
+
+                ctx.fillStyle = 'white';
+                ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
+
+                ball.x += ball.dx;
+                ball.y += ball.dy;
+
+                if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) ball.dx *= -1;
+                if (ball.y - ball.radius < 0) ball.dy *= -1;
+
+                if (
+                    ball.y + ball.radius > paddle.y &&
+                    ball.x > paddle.x &&
+                    ball.x < paddle.x + paddle.width
+                ) {
+                    ball.dy *= -1;
+                }
+
+                if (ball.y + ball.radius > canvas.height) {
+                    alert('Game Over!');
+                    ball = { x: 200, y: 150, dx: 2, dy: 2, radius: 10 };
+                }
+
+                requestAnimationFrame(draw);
+            }
+
+            draw();
+        }
+
+        function playTicTacToe() {
+            alert('Tic Tac Toe coming soon!');
+        }
+
+        function playSnake() {
+            alert('Snake coming soon!');
+        }
+
+        function playBreakout() {
+            alert('Breakout coming soon!');
+        }
+
+        function playMemoryGame() {
+            alert('Memory Game coming soon!');
+        }
+    </script>
+</body>
+</html>
